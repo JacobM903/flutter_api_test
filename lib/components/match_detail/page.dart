@@ -9,17 +9,16 @@ class MatchDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new FutureBuilder(
       future: fetchMatchDataFull(matchId),
-      initialData: "Loading match..",
+      initialData: null,
       builder: (BuildContext context, AsyncSnapshot<String> text) {
-        return new SingleChildScrollView(
-            padding: new EdgeInsets.all(8.0),
-            child: new Text(
-              text.data,
-              style: new TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 19.0,
-              ),
-            ));
+        return new Scaffold(
+          appBar: AppBar(
+            title: Text("Match Detail"),
+          ),
+          body: Center(
+            child: text.data == null ? CircularProgressIndicator() : Text(text.data),
+          ),
+        );
       });
   }
 }
