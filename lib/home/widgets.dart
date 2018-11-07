@@ -22,3 +22,39 @@ List<Widget> getMatchDataTiles(List<MatchListData> _matchList) {
   }
   return ret;
 }
+
+Widget searchButton(Function searchFunction) {
+  return FlatButton(
+    child: Column(
+      children: <Widget>[
+        Icon(Icons.search),
+        Text("Search")
+      ],
+    ),
+    padding: EdgeInsets.all(2.0),
+    onPressed: searchFunction,
+    color: Colors.blue,
+    textColor: Colors.white,
+  );
+}
+
+Widget textInput(TextEditingController controller) {
+  return TextField(
+    decoration: InputDecoration(
+      filled: true,
+      fillColor: Colors.grey[300],
+      border: InputBorder.none,
+      hintText: "Enter a Search Term",
+    ),
+    textAlign: TextAlign.center,
+    controller: controller,
+  );
+}
+
+Widget matchDataList(List<MatchListData> _matchList) {
+  return Expanded(
+    child: ListView(
+      children: getMatchDataTiles(_matchList),
+    ),
+  );
+}

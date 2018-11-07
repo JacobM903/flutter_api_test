@@ -23,8 +23,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _performSearch() async {
-    var match_list = await fetchMatchListFromSummonerName(myController.text);
-    setMatchListState(match_list);
+    var matchList = await fetchMatchListFromSummonerName(myController.text);
+    setMatchListState(matchList);
   }
 
   void _clearMatchList() {
@@ -43,33 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Text("Search Here", textScaleFactor: 3.0,),
-            TextField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[300],
-                border: InputBorder.none,
-                hintText: "Enter a Search Term",
-              ),
-              textAlign: TextAlign.center,
-              controller: myController,
-            ),
-            FlatButton(
-              child: Column(
-                children: <Widget>[
-                  Icon(Icons.search),
-                  Text("Search")
-                ],
-              ),
-              padding: EdgeInsets.all(2.0),
-              onPressed: _performSearch,
-              color: Colors.blue,
-              textColor: Colors.white,
-            ),
-            Expanded(
-              child: ListView(
-                children: getMatchDataTiles(_matchList),
-              ),
-            ),
+            textInput(myController),
+            searchButton(_performSearch),
+            matchDataList(_matchList)
           ],
         ),
       ),
