@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_test/home/classes.dart';
-import 'package:flutter_api_test/home/utils.dart';
-import 'package:flutter_api_test/home/widgets.dart';
+import 'package:fluro/fluro.dart';
+
+import 'package:flutter_api_test/components/home/classes.dart';
+import 'package:flutter_api_test/components/home/utils.dart';
+import 'package:flutter_api_test/components/home/widgets.dart';
+import 'package:flutter_api_test/config/application.dart';
+import 'package:flutter_api_test/config/routes.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -13,6 +17,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  _MyHomePageState() {
+    final router = new Router();
+    Routes.configureRoutes(router);
+    Application.router = router;
+  }
+
   final myController = new TextEditingController();
   List<MatchListData> _matchList = [];
 
@@ -33,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    context = context;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -45,14 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
             Text("Search Here", textScaleFactor: 3.0,),
             textInput(myController),
             searchButton(_performSearch),
-            matchDataList(_matchList)
+            matchDataList(context, _matchList)
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _clearMatchList,
         child: new Icon(Icons.highlight_off),
-      ),// This trailing comma makes auto-formatting nicer for build methods.
+      ),//// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

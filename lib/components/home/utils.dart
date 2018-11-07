@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_api_test/home/classes.dart';
+import 'package:flutter_api_test/components/home/classes.dart';
 import 'package:http/http.dart' as http;
 
 

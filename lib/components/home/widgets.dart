@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_test/home/classes.dart';
+import 'package:flutter_api_test/components/home/classes.dart';
+import 'package:flutter_api_test/config/application.dart';
 
-List<Widget> getMatchDataTiles(List<MatchListData> _matchList) {
+List<Widget> getMatchDataTiles(BuildContext context, List<MatchListData> _matchList) {
   List<Widget> ret = [];
   if(_matchList.length > 0) {
     for (var i = 0; i < _matchList.length; i++) {
+      MatchListData match = _matchList[i];
       Widget tile = new ListTile(
         title: new Text(
           _matchList[i].lane,
         ),
         subtitle: new Text(
-            "Role:${_matchList[i].role}, Champion:${_matchList[i].champion}"
+            "Role:${match.role}, Champion:${match.champion}"
         ),
+        onTap: () => Application.router.navigateTo(context, "/match_detail?matchId=${match.gameId}"),
       );
       ret.add(tile);
     }
@@ -51,10 +54,10 @@ Widget textInput(TextEditingController controller) {
   );
 }
 
-Widget matchDataList(List<MatchListData> _matchList) {
+Widget matchDataList(BuildContext context, List<MatchListData> _matchList) {
   return Expanded(
     child: ListView(
-      children: getMatchDataTiles(_matchList),
+      children: getMatchDataTiles(context, _matchList),
     ),
   );
 }
