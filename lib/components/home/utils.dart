@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 Future<int> fetchAccountID(String summonerName) async {
   final response =
   await http.get(
-      'https://oc1.api.riotgames.com/lol/summoner/v3/summoners/by-name/$summonerName?api_key=RGAPI-36a67753-2cff-452d-b5fc-77fceb96bfcc');
+      'https://oc1.api.riotgames.com/lol/summoner/v3/summoners/by-name/$summonerName?api_key=RGAPI-5caa7ab4-d993-4c3b-b2c0-9f9b23e7d461');
   if (response.statusCode == 200) {
     return json.decode(response.body)['accountId'];
   } else {
@@ -18,7 +18,7 @@ Future<int> fetchAccountID(String summonerName) async {
 Future<List<MatchListData>> fetchMatchList(int accountId) async {
   final response =
   await http.get(
-      'https://oc1.api.riotgames.com/lol/match/v3/matchlists/by-account/$accountId?api_key=RGAPI-36a67753-2cff-452d-b5fc-77fceb96bfcc');
+      'https://oc1.api.riotgames.com/lol/match/v3/matchlists/by-account/$accountId?api_key=RGAPI-5caa7ab4-d993-4c3b-b2c0-9f9b23e7d461');
   var matchList = await json.decode(response.body)["matches"];
   List<MatchListData> digestedList = [];
   for(var i=0;i<matchList.length;i++){

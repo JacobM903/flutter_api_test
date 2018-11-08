@@ -6,11 +6,13 @@ import 'package:flutter_api_test/components/home/utils.dart';
 import 'package:flutter_api_test/components/home/widgets.dart';
 import 'package:flutter_api_test/config/application.dart';
 import 'package:flutter_api_test/config/routes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title, this.firestore}) : super(key: key);
   final String title;
+  final Firestore firestore;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
