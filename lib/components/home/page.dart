@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _clearMatchList,
         child: new Icon(Icons.highlight_off),
-      ),//// This trailing comma makes auto-formatting nicer for build methods.
+      ), //// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
