@@ -1,10 +1,14 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_api_test/components/home/page.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_api_test/components/champ_list/page.dart';
+import 'package:flutter_api_test/config/application.dart';
+import 'package:flutter_api_test/config/routes.dart';
 
 Future<void> main() async {
+  //Set app level variables for Firestore and App routers
   final FirebaseApp app = await FirebaseApp.configure(
       name: 'project-91575974677',
       options: const FirebaseOptions(
@@ -16,6 +20,9 @@ Future<void> main() async {
   final Firestore firestore = Firestore(app: app);
   await firestore.settings(timestampsInSnapshotsEnabled: true);
 
+  final router = new Router();
+  Routes.configureRoutes(router);
+  Application.router = router;
 
   runApp(MyApp(firestore: firestore,));
 }
@@ -30,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: MyHomePage(title: 'Flutter Demo Home Page', firestore: firestore),
+      home: ChampListPage(),
     );
   }
 }

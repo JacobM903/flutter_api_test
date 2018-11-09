@@ -10,21 +10,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title, this.firestore}) : super(key: key);
-  final String title;
-  final Firestore firestore;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  _MyHomePageState() {
-    final router = new Router();
-    Routes.configureRoutes(router);
-    Application.router = router;
-  }
-
   final myController = new TextEditingController();
   List<MatchListData> _matchList = [];
 
@@ -48,18 +38,24 @@ class _MyHomePageState extends State<MyHomePage> {
     context = context;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Home"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Text("Search Here", textScaleFactor: 3.0,),
-            textInput(myController),
-            searchButton(_performSearch),
-            matchDataList(context, _matchList)
-          ],
+      body: new GestureDetector(
+        onTap: () {
+          // call this method here to hide soft keyboard
+          FocusScope.of(context).requestFocus(new FocusNode());
+        },
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Text("Search Here", textScaleFactor: 3.0,),
+              textInput(myController),
+              searchButton(_performSearch),
+              matchDataList(context, _matchList),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
