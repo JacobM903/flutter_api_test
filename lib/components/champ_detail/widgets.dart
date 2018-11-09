@@ -17,11 +17,10 @@ Widget abilityDetails(champId){
       future: getChampData(champId),
       initialData: null,
       builder: (BuildContext context, response) {
-        return new Column(
-          children: response.data == null ? <Widget>[
-            CircularProgressIndicator(),
-          ] : getSpellTiles(response.data["data"][champId]["spells"]
-          ),
+        return new Expanded(
+          child: response.data == null ?
+            CircularProgressIndicator() :
+            ListView(children: getSpellTiles(response.data["data"][champId]["spells"])),
         );
       });
 }
@@ -33,10 +32,10 @@ List<ListTile> getSpellTiles(List<dynamic> spells) {
       Map<String, dynamic> spell = spells[i];
       Widget tile = new ListTile(
         title: new Text(
-          "${spell['id']} - ${spell['name']}",
+          "${spell['id']} - ${spell['cooldown']}",
         ),
         subtitle: new Text(
-            "CD:${spell["cooldown"]}"
+            spell["description"]
         ),
       );
       tiles.add(tile);
